@@ -1,0 +1,71 @@
+name: 'Configure CMake for Python Bindings'
+description: 'Configure the CMake build system for Python bindings with conda'
+
+inputs:
+  platform:
+    description: 'Target platform (linux, windows, macos, macos-arm)'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Clear any existing cmake cache
+      shell: bash
+      run: |
+        echo "Clearing any existing CMake cache for Python bindings..."
+        rm -rf build_python/CMakeCache.txt build_python/CMakeFiles
+        echo "Cache cleared!"
+
+    - name: Verify conda environment and Python setup
+      shell: bash -el {0}
+      run: |
+        echo "Verifying conda environment for Python bindings..."
+        echo "Active conda environment: $CONDA_DEFAULT_ENV"
+        echo "Python executable: $(which python)"
+        echo "Python version: $(python --version)"
+        echo "pybind11 location: $(python -c 'import pybind11; print(pybind11.get_cmake_dir())')"
+        echo "Environment verification complete!"
+
+    - name: Configure CMake for Python bindings (Linux/macOS)
+      if: inputs.platform != 'windows'
+      shell: bash -el {0}
+      run: |
+        echo "Configuring CMake for Python bindings on ${{ inputs.platform }}..."
+        
+        cmake -B build_python \
+          -DCMAKE_TOOLCHAIN_FILE="${GITHUB_WORKSPACE}/cmake/conda-toolchain.cmake" \
+          -DVIRA_BUILD_VIRAPY=ON \
+          -DCMAKE_BUILD_TYPE=Release \
+          -G Ninja
+        
+        echo "CMake configuration for Python bindings complete!"
+
+    - name: Configure CMake for Python bindings (Windows)
+      if: inputs.platform == 'windows'
+      shell: cmd
+      run: |
+        echo Configuring CMake for Python bindings on Windows...
+        call conda activate vira_env
+        
+        cmake -B build_python ^
+          -DCMAKE_TOOLCHAIN_FILE="../cmake/conda-toolchain.cmake" ^
+          -DVIRA_BUILD_VIRAPY=ON ^
+          -DCMAKE_BUILD_TYPE=Release ^
+          -G "Visual Studio 17 2022" ^
+          -A x64
+        
+        echo CMake configuration for Python bindings complete!
+
+    - name: Display Python binding configuration info
+      shell: bash -el {0}
+      run: |
+        echo "Python binding configuration summary:"
+        echo "Build directory: ${GITHUB_WORKSPACE}/build_python"
+        echo "Toolchain file: ${GITHUB_WORKSPACE}/cmake/conda-toolchain.cmake"
+        echo "Platform: ${{ inputs.platform }}"
+        echo "Python bindings enabled: VIRA_BUILD_VIRAPY=ON"
+        
+        # Show Python-specific environment info
+        echo "Python environment details:"
+        python -c "import sysconfig; print(f'Python include dir: {sysconfig.get_path(\"include\")}')"
+        python -c "import sysconfig; print(f'Python library dir: {sysconfig.get_path(\"stdlib\")}')"

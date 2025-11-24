@@ -1,0 +1,22 @@
+name: vira_env
+channels:
+  - conda-forge
+dependencies:
+  - assimp=5.4.3         # 3D model loading
+  - cfitsio=4.6.2        # FITS I/O
+  - cspice=67            # NASA SPICE 
+  - embree3=3.13.5       # Ray tracing kernels
+  - fftw=3.3.10          # Fast Fourier Transform
+  - gdal=3.10.0          # Geospatial Abstraction
+  - glm=1.0.1            # Linear Algebra
+  - indicators=2.3       # Progress bars
+  - libtiff=4.7.0        # TIFF I/O
+  - lz4-c=1.10.0         # Compression
+  - plog=1.1.10          # Logging
+#  - tclap=1.2.5          # Argument parser
+  - termcolor-cpp=2.0.0  # Terminal colors
+  - tbb-devel=2021.12.0  # Intel TBB
+  - yaml-cpp=0.8.0       # YAML parser
+  
+  # Test dependencies (optional)
+  - gtest=1.16.0         # Google Test

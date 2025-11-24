@@ -1,0 +1,36 @@
+name: MacOS (Intel) ViraPy Build
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  macos-python:
+    runs-on: macos-13 # Updated August 2025
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: Set up build environment
+      uses: ./.github/actions/setup-build
+      with:
+        platform: macos
+    
+    - name: Set up Python environment
+      uses: ./.github/actions/setup-python
+      with:
+        platform: macos
+    
+    - name: Configure Python bindings
+      uses: ./.github/actions/configure-python-cmake
+      with:
+        platform: macos
+    
+    - name: Build Python bindings
+      uses: ./.github/actions/build-python-cmake
+      with:
+        platform: macos

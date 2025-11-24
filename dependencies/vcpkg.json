@@ -1,0 +1,114 @@
+{
+  "name": "vira",
+  "description": "A rendering and ray tracing library for space exploration and mission design purposes.",
+  "builtin-baseline": "3bdaa9b42070c241c1bdb02b4cf01f90de579738",
+  "dependencies": [
+    "assimp",
+    "cfitsio",
+    "cspice",
+    {
+      "name": "embree3",
+      "default-features": false,
+      "features": [
+        "geometry-instance",
+        "geometry-triangle",
+        "ray-packets",
+        "tasking-tbb"
+      ]
+    },
+    "fftw3",
+    {
+      "name": "gdal",
+      "default-features": false
+    },
+    "glm",
+    "indicators",
+    "lz4",
+    "plog",
+    "stb",
+    "tbb",
+    "termcolor",
+    "tiff",
+    "yaml-cpp"
+  ],
+  "features": {
+    "tests": {
+      "description": "Build tests using gtest",
+      "dependencies": [
+        "gtest"
+      ]
+    },
+    "tools": {
+      "description": "Build command-line tools",
+      "dependencies": [
+        "tclap"
+      ]
+    }
+  },
+  "overrides": [
+    {
+      "name": "assimp",
+      "version": "5.4.3"
+    },
+    {
+      "name": "cfitsio",
+      "version": "3.49#6"
+    },
+    {
+      "name": "cspice",
+      "version": "67#3"
+    },
+    {
+      "name": "embree3",
+      "version": "3.13.5#4"
+    },
+    {
+      "name": "fftw3",
+      "version": "3.3.10#10"
+    },
+    {
+      "name": "gdal",
+      "version": "3.10.0#2"
+    },
+    {
+      "name": "glm",
+      "version": "1.0.1#3"
+    },
+    {
+      "name": "indicators",
+      "version": "2.3"
+    },
+    {
+      "name": "gtest",
+      "version": "1.16.0#1"
+    },
+    {
+      "name": "lz4",
+      "version": "1.9.4#1"
+    },
+    {
+      "name": "plog",
+      "version": "1.1.10"
+    },
+    {
+      "name": "stb",
+      "version": "2024-07-29#1"
+    },
+    {
+      "name": "tclap",
+      "version": "1.2.5"
+    },
+    {
+      "name": "termcolor",
+      "version": "2.0.0"
+    },
+    {
+      "name": "tiff",
+      "version": "4.7.0"
+    },
+    {
+      "name": "yaml-cpp",
+      "version": "0.8.0#2"
+    }
+  ]
+}

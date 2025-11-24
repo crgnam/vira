@@ -1,0 +1,117 @@
+# Inputs should follow the following format:
+#  - file: path/to/DEM
+#    overlap-files: 
+#      - path/to/overlapping-dem
+#      - glob/of/overlapping-dems/*
+#    albedo-files:
+#      - path/to/albedo_file
+#      - glob/of/albedo_files/*
+#    append-right: path/to/adjacent-dem
+#    append-below: path/to/adjacent-dem
+#    z-scale: 1000
+#    compress: False
+#    output_override: path/to/specific/output_dir/
+
+# All paths must be specified either as:
+#  - Absolute paths
+#  - Paths relative to the root path provided to vira_dem2qld
+#     - If no root path is provided to vira_dem2qld, the location 
+#       of this file is assumed to be the root path 
+
+output: qpu/
+
+max-vertices: 1000000
+
+default-albedo: 0.12
+
+inputs:   
+# Northern Polar DEM:
+  - file: dems/LDEM_60N_120M.LBL
+    albedo-files:
+      - albedo/WAC_EMP_643NM_P900N0000_304P.IMG
+    albedo-files-lonwrap:
+      - albedo/WAC_EMP_643NM_E300N*.IMG
+    
+# Northern Equatorial DEMs:
+  - file: dems/SLDEM2015_256_0N_60N_000_120_FLOAT.LBL
+    overlap-files: 
+      - dems/LDEM_60N_120M.LBL
+    albedo-files:
+      - albedo/WAC_EMP_643NM_P900N0000_304P.IMG
+    albedo-files-lonwrap:
+      - albedo/WAC_EMP_643NM_E*.IMG
+    append-right: dems/SLDEM2015_256_0N_60N_120_240_FLOAT.LBL
+    append-below: dems/SLDEM2015_256_60S_0S_000_120_FLOAT.LBL
+    z-scale: 1000
+
+  - file: dems/SLDEM2015_256_0N_60N_120_240_FLOAT.LBL
+    overlap-files: 
+      - dems/LDEM_60N_120M.LBL
+    albedo-files:
+      - albedo/WAC_EMP_643NM_P900N0000_304P.IMG
+    albedo-files-lonwrap:
+      - albedo/WAC_EMP_643NM_E*.IMG
+    append-right: dems/SLDEM2015_256_0N_60N_240_360_FLOAT.LBL
+    append-below: dems/SLDEM2015_256_60S_0S_120_240_FLOAT.LBL
+    z-scale: 1000
+
+  - file: dems/SLDEM2015_256_0N_60N_240_360_FLOAT.LBL
+    overlap-files: 
+      - dems/LDEM_60N_120M.LBL
+    albedo-files:
+      - albedo/WAC_EMP_643NM_P900N0000_304P.IMG
+    albedo-files-lonwrap:
+      - albedo/WAC_EMP_643NM_E*.IMG
+    append-right: dems/SLDEM2015_256_0N_60N_000_120_FLOAT.LBL
+    append-below: dems/SLDEM2015_256_60S_0S_240_360_FLOAT.LBL
+    z-scale: 1000
+
+# Southern Equatorial DEMs:
+  - file: dems/SLDEM2015_256_60S_0S_000_120_FLOAT.LBL
+    overlap-files: 
+      - dems/LDEM_60S_60M.TIF
+    albedo-files:
+      - albedo/WAC_EMP_643NM_P900S0000_304P.IMG
+    albedo-files-lonwrap:
+      - albedo/WAC_EMP_643NM_E*.IMG
+    append-right: dems/SLDEM2015_256_60S_0S_120_240_FLOAT.LBL
+    z-scale: 1000
+
+  - file: dems/SLDEM2015_256_60S_0S_120_240_FLOAT.LBL
+    overlap-files: 
+      - dems/LDEM_60S_60M.TIF
+    albedo-files:
+      - albedo/WAC_EMP_643NM_P900S0000_304P.IMG
+    albedo-files-lonwrap:
+      - albedo/WAC_EMP_643NM_E*.IMG
+    append-right: dems/SLDEM2015_256_60S_0S_240_360_FLOAT.LBL
+    z-scale: 1000
+
+  - file: dems/SLDEM2015_256_60S_0S_240_360_FLOAT.LBL
+    overlap-files: 
+      - dems/LDEM_60S_60M.TIF
+    albedo-files:
+      - albedo/WAC_EMP_643NM_P900S0000_304P.IMG
+    albedo-files-lonwrap:
+      - albedo/WAC_EMP_643NM_E*.IMG
+    append-right: dems/SLDEM2015_256_60S_0S_000_120_FLOAT.LBL
+    z-scale: 1000
+   
+# Southern Polar DEMs:
+  - file: dems/LDEM_60S_60M.TIF
+    overlap-files: 
+      - dems/LDEM_80S_20M.TIF
+    albedo-files:
+      - albedo/WAC_EMP_643NM_P900S0000_304P.IMG
+    albedo-files-lonwrap:
+      - albedo/WAC_EMP_643NM_E300S*.IMG
+
+  - file: dems/LDEM_80S_20M.TIF
+    overlap-files: 
+      - dems/LDEM_87S_5M.TIF
+    albedo-files:
+      - albedo/WAC_EMP_643NM_P900S0000_304P.IMG
+
+  - file: dems/LDEM_87S_5M.TIF
+    albedo-files:
+      - albedo/WAC_EMP_643NM_P900S0000_304P.IMG

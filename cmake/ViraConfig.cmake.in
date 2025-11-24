@@ -1,0 +1,114 @@
+@PACKAGE_INIT@
+
+# Include helper modules
+include(CMakeFindDependencyMacro)
+
+# Set up paths
+set_and_check(VIRA_INCLUDE_DIR "@PACKAGE_VIRA_INSTALL_INCLUDEDIR@")
+set_and_check(VIRA_CMAKE_DIR "@PACKAGE_VIRA_INSTALL_CMAKEDIR@")
+
+# Include our helper modules for downstream projects
+list(APPEND CMAKE_MODULE_PATH ${VIRA_CMAKE_DIR})
+include(SimplePackageHelpers)
+include(MarkSystemLibrary)
+
+# Suppress deprecation warnings from third-party libraries
+set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "" FORCE)
+
+# Find all required dependencies with the same logic as the main build
+find_dependency(assimp CONFIG)
+find_dependency(embree 3 CONFIG)
+find_dependency(glm CONFIG)
+find_dependency(TBB CONFIG)
+
+# Handle CFITSIO
+set(cfitsio_FOUND FALSE)
+try_config_packages(cfitsio "unofficial-cfitsio;cfitsio" "cfitsio;CFITSIO::CFITSIO;cfitsio::cfitsio")
+if(NOT cfitsio_FOUND)
+    try_pkgconfig(cfitsio "cfitsio" "cfitsio")
+endif()
+if(NOT cfitsio_FOUND)
+    try_manual_discovery(cfitsio "cfitsio;libcfitsio" "fitsio.h" "cfitsio")
+endif()
+if(NOT cfitsio_FOUND)
+    message(FATAL_ERROR "Could not find CFITSIO")
+endif()
+
+# Handle TIFF
+set(tiff_FOUND FALSE)
+try_config_packages(tiff "TIFF;tiff" "TIFF::TIFF;TIFF::tiff;tiff")
+if(NOT tiff_FOUND)
+    try_pkgconfig(tiff "libtiff-4" "TIFF::TIFF")
+endif()
+if(NOT tiff_FOUND)
+    try_manual_discovery(tiff "tiff;libtiff;tiff4;libtiff4" "tiff.h;tiffio.h" "TIFF::TIFF")
+endif()
+if(NOT tiff_FOUND)
+    message(FATAL_ERROR "Could not find TIFF")
+endif()
+
+# Handle FFTW3f
+set(FFTW3f_FOUND FALSE)
+try_config_packages(FFTW3f "FFTW3f;fftw3f" "FFTW3::fftw3f;fftw3f::fftw3f")
+if(NOT FFTW3f_FOUND)
+    try_pkgconfig(FFTW3f "fftw3f" "FFTW3::fftw3f")
+endif()
+if(NOT FFTW3f_FOUND)
+    try_manual_discovery(FFTW3f "fftw3f;libfftw3f" "fftw3.h" "FFTW3::fftw3f")
+endif()
+if(NOT FFTW3f_FOUND)
+    message(FATAL_ERROR "Could not find FFTW3f")
+endif()
+
+# Handle GDAL
+set(GDAL_FOUND FALSE)
+try_config_packages(GDAL "GDAL;gdal" "GDAL::GDAL;gdal::gdal")
+if(NOT GDAL_FOUND)
+    try_pkgconfig(GDAL "gdal" "GDAL::GDAL")
+endif()
+if(NOT GDAL_FOUND)
+    try_manual_discovery(GDAL "gdal;libgdal" "gdal.h" "GDAL::GDAL")
+endif()
+if(NOT GDAL_FOUND)
+    message(FATAL_ERROR "Could not find GDAL")
+endif()
+
+# Handle LZ4
+set(lz4_FOUND FALSE)
+try_manual_discovery(lz4 "lz4;liblz4" "lz4.h" "lz4::lz4")
+if(NOT lz4_FOUND)
+    try_config_packages(lz4 "lz4" "lz4::lz4")
+endif()
+if(NOT lz4_FOUND)
+    try_config_packages(lz4 "LZ4" "LZ4::lz4")
+endif()
+if(NOT lz4_FOUND)
+    try_pkgconfig(lz4 "liblz4" "lz4::lz4")
+endif()
+if(NOT lz4_FOUND)
+    message(FATAL_ERROR "Could not find LZ4")
+endif()
+
+# Handle yaml-cpp
+set(yaml-cpp_FOUND FALSE)
+try_config_packages(yaml-cpp "yaml-cpp" "yaml-cpp::yaml-cpp;yaml-cpp")
+if(NOT yaml-cpp_FOUND)
+    try_pkgconfig(yaml-cpp "yaml-cpp" "yaml-cpp::yaml-cpp")
+endif()
+if(NOT yaml-cpp_FOUND)
+    try_manual_discovery(yaml-cpp "yaml-cpp;libyaml-cpp" "yaml-cpp/yaml.h" "yaml-cpp::yaml-cpp")
+endif()
+if(NOT yaml-cpp_FOUND)
+    message(FATAL_ERROR "Could not find yaml-cpp")
+endif()
+
+# Restore deprecation warnings
+set(CMAKE_WARN_DEPRECATED ON CACHE BOOL "" FORCE)
+
+# Include the target file
+include("${CMAKE_CURRENT_LIST_DIR}/ViraTargets.cmake")
+
+# Set the main target
+set(VIRA_TARGETS vira::vira)
+
+check_required_components(Vira)

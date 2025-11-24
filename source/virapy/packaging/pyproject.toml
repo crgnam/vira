@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "virapy"
+dynamic = ["version"]
+description = "Python bindings for Vira"
+authors = [{name = "GSFC NMDB", email = "GSFC-DL-OpticalNav-Support@mail.nasa.gov"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.7"  # Broad support
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8", 
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+Homepage = "https://github.com/nasa/vira"
+Repository = "https://github.com/nasa/vira"
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = true
+
+[tool.setuptools.packages.find]
+
+[tool.setuptools.package-data]
+virapy = ["*"]
+
+[tool.setuptools.data-files]
+"_static" = ["_static/*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "virapy._version.__version__"}

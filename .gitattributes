@@ -1,0 +1,7 @@
+# Ensure shell scripts always use LF
+*.sh text eol=lf
+*.cmake text eol=lf
+*.bat text eol=crlf
+
+# Let Git handle other text files normally
+* text=auto

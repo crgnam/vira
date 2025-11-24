@@ -1,0 +1,4 @@
+Utils
+=======================
+
+.. doxygennamespace:: vira::utils

@@ -1,0 +1,14 @@
+output: qpu/ldem128/
+
+max-vertices: 1000000
+
+default-albedo: 0.12
+
+inputs:
+  - file: LDEM_128.tif
+    albedo-files:
+      - albedo/WAC_EMP_643NM_P900N0000_304P.IMG
+      - albedo/WAC_EMP_643NM_P900S0000_304P.IMG
+    albedo-files-lonwrap:
+      - albedo/WAC_EMP_643NM_E300*.IMG
+    append-right: LDEM_128.tif

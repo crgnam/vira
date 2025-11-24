@@ -1,0 +1,35 @@
+name: 'Configure CMake'
+description: 'Configure the CMake build system with conda toolchain'
+
+inputs:
+  platform:
+    description: 'Target platform (linux, windows, macos, macos-arm)'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Configure CMake (Linux/macOS)
+      if: inputs.platform != 'windows'
+      shell: bash -el {0}  # Ensures conda environment is activated
+      run: |
+        cmake -B build \
+          -DCMAKE_TOOLCHAIN_FILE="${GITHUB_WORKSPACE}/cmake/conda-toolchain.cmake" \
+          -DVIRA_BUILD_EXAMPLES=ON \
+          -DVIRA_BUILD_TOOLS=ON \
+          -DCMAKE_BUILD_TYPE=Release \
+          -G Ninja
+
+    - name: Configure CMake (Windows)
+      if: inputs.platform == 'windows'
+      shell: cmd
+      run: |
+        call conda activate vira_env
+        
+        cmake -B build ^
+          -DCMAKE_TOOLCHAIN_FILE="../cmake/conda-toolchain.cmake" ^
+          -DVIRA_BUILD_EXAMPLES=ON ^
+          -DVIRA_BUILD_TOOLS=ON ^
+          -DCMAKE_BUILD_TYPE=Release ^
+          -G "Visual Studio 17 2022" ^
+          -A x64
