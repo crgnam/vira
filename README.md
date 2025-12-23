@@ -6,6 +6,12 @@ This project provides a library which can be used for building new projects, as 
 
 In the future, we hope to consolidate these executables into a single comprehensive application, as well as to provide bindings for Python, Julia, and MATLAB.
 
+# NOTICE OF FORK:
+> This is a maintenance fork of the [original NASA open source release](https://github.com/nasa/vira), maintained by the original author. **For new projects, please use [Huira](https://github.com/huira-render/huira)**, which is the actively developed successor to Vira with improved features and ongoing support. 
+>
+> **Note:** Huira is currently under active development and not yet feature-complete. If you need a stable, working solution today, Vira remains functional for production use. This fork receives basic maintenance and critical bug fixes.
+
+
 ## Repository File Structure
 - `cmake/`: CMake helper modules
 - `dependencies/`: Folder containing dependency lists and environment configurations
