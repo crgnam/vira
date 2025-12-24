@@ -268,8 +268,6 @@ namespace vira {
     {
         if (this->isConfiguredSpiceFrame()) {
             return SpiceUtils<TFloat>::computeVelocity(this->getNAIFName(), ephemeris_time_, "J2000", "NONE", "SSB");
-            auto state = SpiceUtils<TFloat>::spkezr(this->getNAIFName(), ephemeris_time_, "J2000", "NONE", "SSB");
-            return state[1];
         }
         else {
             return this->getLocalVelocity();
