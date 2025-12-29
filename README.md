@@ -4,13 +4,27 @@ Named after Viracocha (the Inca creator deity and creator of the Scene, sun, moo
 
 This project provides a library which can be used for building new projects, as well as several executables to provide specific functionality.
 
-In the future, we hope to consolidate these executables into a single comprehensive application, as well as to provide bindings for Python, Julia, and MATLAB.
+**Supported Platforms:** Linux, macOS (ARM), Windows
+
+*NOTE:* `main` reflects the latest stable development state; `develop` contains active feature work.
+
+
+|  | Build | Coverage |
+|---|---|---|
+| **main** | [![Build](https://github.com/crgnam/vira/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/crgnam/vira/actions/workflows/build.yml?query=branch%3Amain) | [![Coverage](https://codecov.io/gh/crgnam/vira/branch/main/graph/badge.svg)](https://app.codecov.io/gh/crgnam/vira/tree/main) |
+| **develop** | [![Build](https://github.com/crgnam/vira/actions/workflows/build.yml/badge.svg?branch=develop)](https://github.com/crgnam/vira/actions/workflows/build.yml?query=branch%3Adevelop) | [![Coverage](https://codecov.io/gh/crgnam/vira/branch/develop/graph/badge.svg)](https://app.codecov.io/gh/crgnam/vira/tree/develop) |
+
+***
 
 # NOTICE OF FORK:
-> This is a maintenance fork of the [original NASA open source release](https://github.com/nasa/vira), maintained by the original author. **For new projects, please use [Huira](https://github.com/huira-render/huira)**, which is the actively developed successor to Vira with improved features and ongoing support. 
->
-> **Note:** Huira is currently under active development and not yet feature-complete. If you need a stable, working solution today, Vira remains functional for production use. This fork receives basic maintenance and critical bug fixes.
+> [!IMPORTANT]
+> This is a maintenance fork of the [original NASA open source release](https://github.com/nasa/vira), maintained by the original author.
 
+<!--
+> [!IMPORTANT]
+> **For new projects, please use [Huira](https://github.com/huira-render/huira)**, which is the actively developed successor to Vira with improved features and ongoing support.
+> **Note:** Huira is currently under active development and not yet feature-complete. If you need a stable, working solution today, Vira remains functional for production use. This fork receives basic maintenance and critical bug fixes.
+-->
 
 ## Repository File Structure
 - `cmake/`: CMake helper modules

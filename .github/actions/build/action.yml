@@ -1,9 +1,9 @@
-name: 'Build CMake Project'
+name: 'Build Project'
 description: 'Build the CMake project with conda environment'
 
 inputs:
   platform:
-    description: 'Target platform (linux, windows, macos, macos-arm)'
+    description: 'Target platforms: Linux, MacOS, MacOS-ARM, and Windows'
     required: true
 
 runs:
