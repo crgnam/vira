@@ -49,7 +49,7 @@ test:
 about:
   home: https://github.com/crgnam/vira
   license: MIT
-  license_file: LICENSE
+  license_file: LICENSE.pdf
   summary: Spectral renderer for space applications
   description: |
     Vira is a C++ library for spectral rendering in space applications,

@@ -72,7 +72,7 @@ configure_file(packaging/__init__.py ${CMAKE_BINARY_DIR}/virapy/__init__.py COPY
 
 # Copy README and License
 configure_file(packaging/README.md ${CMAKE_BINARY_DIR}/README.md COPYONLY)
-configure_file(${CMAKE_SOURCE_DIR}/LICENSE ${CMAKE_BINARY_DIR}/LICENSE COPYONLY)
+configure_file(${CMAKE_SOURCE_DIR}/LICENSE.pdf ${CMAKE_BINARY_DIR}/LICENSE.pdf COPYONLY)
 
 # Create _static directory and copy logo
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/_static)
