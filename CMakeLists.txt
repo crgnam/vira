@@ -93,9 +93,9 @@ install(FILES
 
 # Install helper modules that downstream projects might need
 install(FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/SimplePackageHelpers.cmake"
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/MarkSystemLibrary.cmake"
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/FindProjDB.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/helpers/SimplePackageHelpers.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/helpers/MarkSystemLibrary.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/find/ViraFindProjDB.cmake"
     DESTINATION ${VIRA_INSTALL_CMAKEDIR}
 )
 
