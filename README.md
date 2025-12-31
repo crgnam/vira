@@ -20,6 +20,10 @@ This project provides a library which can be used for building new projects, as 
 > [!IMPORTANT]
 > This is a maintenance fork of the [original NASA open source release](https://github.com/nasa/vira), maintained by the original author.
 
+> [!WARNING]  
+> This project was released under expedited circumstances, and there are several known issues being actively tracked in the [Issues](https://github.com/crgnam/vira/issues) section of this repository.
+> Users should review open issues before deploying in production environments. **Contributions and bug reports are welcome.**
+
 <!--
 > [!IMPORTANT]
 > **For new projects, please use [Huira](https://github.com/huira-render/huira)**, which is the actively developed successor to Vira with improved features and ongoing support.
