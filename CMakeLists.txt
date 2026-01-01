@@ -37,6 +37,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 message("Vira version ${PROJECT_VERSION}")
 
+# Workaround for conda-forge LLVM 21+ with older macOS SDK
+# See: https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
+if(APPLE)
+    add_compile_definitions(_LIBCPP_DISABLE_AVAILABILITY)
+endif()
+
 # Ensure if Debug definitions:
 if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_compile_definitions(NDEBUG)

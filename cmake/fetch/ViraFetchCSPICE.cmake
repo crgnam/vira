@@ -14,6 +14,10 @@ find_library(LIB_CSPICE
         ${CSPICE_ROOT}/lib
         $ENV{CSPICE_ROOT}/lib
         $ENV{CONDA_PREFIX}/lib
+        $ENV{CONDA_PREFIX}/Library/lib
+        $ENV{PREFIX}/lib
+        $ENV{PREFIX}/Library/lib
+        $ENV{LIBRARY_PREFIX}/lib
         /usr/local/lib
         /opt/homebrew/lib
 )
@@ -24,6 +28,10 @@ find_path(CSPICE_INCLUDE_DIR
         ${CSPICE_ROOT}/include
         $ENV{CSPICE_ROOT}/include
         $ENV{CONDA_PREFIX}/include
+        $ENV{CONDA_PREFIX}/Library/include
+        $ENV{PREFIX}/include
+        $ENV{PREFIX}/Library/include
+        $ENV{LIBRARY_PREFIX}/include
         /usr/local/include
         /opt/homebrew/include
     PATH_SUFFIXES cspice
