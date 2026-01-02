@@ -37,4 +37,39 @@ if(NOT lz4_TARGET)
     message(FATAL_ERROR "lz4_TARGET not set")
 endif()
 
+# Create alias for the other case variant to ensure compatibility
+# This handles the case where viraTargets.cmake was built with one variant
+# but the downstream user's system provides the other
+if(TARGET lz4::lz4 AND NOT TARGET LZ4::lz4)
+    add_library(LZ4::lz4 INTERFACE IMPORTED)
+    set_target_properties(LZ4::lz4 PROPERTIES INTERFACE_LINK_LIBRARIES lz4::lz4)
+endif()
+if(TARGET LZ4::lz4 AND NOT TARGET lz4::lz4)
+    add_library(lz4::lz4 INTERFACE IMPORTED)
+    set_target_properties(lz4::lz4 PROPERTIES INTERFACE_LINK_LIBRARIES LZ4::lz4)
+endif()
+
 mark_as_system_library(${lz4_TARGET})
+
+if(lz4_TARGET AND NOT TARGET ${lz4_TARGET})
+    # lz4_TARGET is a string (e.g. LZ4::lz4) but no such target exists.
+    # This happens on Windows/conda.
+    add_library(${lz4_TARGET} UNKNOWN IMPORTED)
+
+    set_target_properties(${lz4_TARGET} PROPERTIES
+        IMPORTED_LOCATION "${LZ4_LIBRARY}"
+        INTERFACE_INCLUDE_DIRECTORIES "${LZ4_INCLUDE_DIR}"
+    )
+endif()
+
+# ------------------------------------------------------------------
+# Normalize LZ4 target name
+# Canonical target: lz4::lz4
+# ------------------------------------------------------------------
+if(TARGET LZ4::lz4 AND NOT TARGET lz4::lz4)
+    add_library(lz4::lz4 ALIAS LZ4::lz4)
+endif()
+
+if(TARGET lz4::lz4)
+    set(lz4_TARGET lz4::lz4)
+endif()
