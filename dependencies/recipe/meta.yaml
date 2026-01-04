@@ -61,7 +61,7 @@ test:
 
 about:
   home: https://github.com/crgnam/vira
-  license: MIT
+  license: NOSA-1.3
   license_file: LICENSE.pdf
   summary: Spectral renderer for space applications
   description: |
