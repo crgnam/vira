@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> **For new projects, please use [Huira](https://github.com/huira-render/huira)**, which is the actively developed successor to Vira with improved features and ongoing support.  It is also available with stable python bindings on PyPI, and is distributed with vcpkg and conda-forge.
+
 # <img src="docs/_static/vira-wide.png" width="400">
 
 Named after Viracocha (the Inca creator deity and creator of the Scene, sun, moon, and stars), Vira is a rendering and ray tracing library for space exploration and mission design purposes.
@@ -19,11 +22,6 @@ This project provides a library which can be used for building new projects, as 
 > This project was released under expedited circumstances, and there are several known issues being actively tracked in the [Issues](https://github.com/crgnam/vira/issues) section of this repository.
 > Users should review open issues before deploying in production environments. **Contributions and bug reports are welcome.**
 
-<!--
-> [!IMPORTANT]
-> **For new projects, please use [Huira](https://github.com/huira-render/huira)**, which is the actively developed successor to Vira with improved features and ongoing support.
-> **Note:** Huira is currently under active development and not yet feature-complete. If you need a stable, working solution today, Vira remains functional for production use. This fork receives basic maintenance and critical bug fixes.
--->
 
 ## Repository File Structure
 - `cmake/`: CMake helper modules
